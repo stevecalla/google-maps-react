@@ -8,8 +8,8 @@ import {
 
 import { useRef, useState, memo } from "react";
 
-// import Placeholder from "react-bootstrap/Placeholder";
-import Spinner from 'react-bootstrap/Spinner';
+import Placeholder from "react-bootstrap/Placeholder";
+import Spinner from "react-bootstrap/Spinner";
 
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -39,13 +39,21 @@ const mapStyle = {
 };
 
 const formStyle = {
-  width: "400px",
-  height: "400px",
+  top: "75px",
+  // width: "600px",
+  // height: "200px",
   position: "absolute",
   zIndex: "1",
   backgroundColor: "white",
-  border: "1px solid black",
+  // border: "1px solid black",
   // display: "none",
+};
+
+const iconStyle = {
+  color: "white",
+  fontSize: "1.5em",
+  "-webkitTextStroke": "1px #000",
+  "-webkiTextFillColor": "transparent",
 };
 
 const center = { lat: 40.1672, lng: -105.1019 };
@@ -78,7 +86,7 @@ function Map() {
 
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
-    
+
     const results = await directionsService.route({
       origin: origin.current.value,
       destination: destination.current.value,
@@ -103,7 +111,7 @@ function Map() {
   }
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className="d-flex align-items-center">
       <GoogleMap
         center={center}
         zoom={15}
@@ -134,59 +142,103 @@ function Map() {
         )}
       </GoogleMap>
 
-      <Form style={formStyle}>
-        <Row className="align-items-center">
-          <Col xs="auto">
-            <Autocomplete>
-              <Form.Control
-                className="mb-2"
-                type="text"
-                id="origin"
-                name="origin"
-                placeholder="Origin"
-                ref={origin}
+      <div style={formStyle} className="d-flex flex-column p-2 rounded">
+        <Form>
+          <Row>
+            <Col xs="auto">
+              <Autocomplete>
+                <Form.Control
+                  className="mb-2"
+                  type="text"
+                  id="origin"
+                  name="origin"
+                  placeholder="Origin"
+                  ref={origin}
+                />
+              </Autocomplete>
+            </Col>
+            <Col xs="auto">
+              <Autocomplete>
+                <Form.Control
+                  className="mb-2"
+                  type="text"
+                  id="destination"
+                  name="destination"
+                  placeholder="Destination"
+                  ref={destination}
+                />
+              </Autocomplete>
+            </Col>
+            <Col xs="auto">
+              <Button type="submit" className="mb-2" onClick={calculateRoute}>
+                Submit
+              </Button>
+            </Col>
+            <Col xs="auto">
+              <FontAwesomeIcon
+                icon="fa-trash"
+                className="p-2 fa-xl"
+                title="GitHub"
+                // style={{ color: "#0565EE" }}
+                style={{ color: "grey" }}
+                onClick={clearRoute}
               />
-            </Autocomplete>
-          </Col>
-          <Col xs="auto">
-            <Autocomplete>
-              <Form.Control
-                className="mb-2"
-                type="text"
-                id="destination"
-                name="destination"
-                placeholder="Destination"
-                ref={destination}
+            </Col>
+          </Row>
+        </Form>
+
+        <div>
+          <Row>
+            <Col xs="auto">
+              <Autocomplete>
+                <Form.Control
+                  className="mb-2"
+                  type="text"
+                  id="distance"
+                  name="distance"
+                  placeholder="Distance"
+                  value={distance && `Distance: ${distance}`}
+                  disabled
+                />
+              </Autocomplete>
+            </Col>
+            <Col xs="auto">
+              <Autocomplete>
+                <Form.Control
+                  className="mb-2"
+                  type="text"
+                  id="duration"
+                  name="duration"
+                  placeholder="Duration"
+                  value={distance && `Duration: ${duration}`}
+                  disabled
+                />
+              </Autocomplete>
+            </Col>
+            <Col xs="auto">
+              <Button
+                style={{ visibility: "hidden" }}
+                type="submit"
+              >
+                Submit
+              </Button>
+            </Col>
+            <Col xs="auto">
+              <FontAwesomeIcon
+                icon="fa-location"
+                className="p-2 fa-xl"
+                // style={{ color: "#0565EE" }}
+                style={{ color: "grey" }}
+                onClick={() => {
+                  console.log("click");
+                  map.panTo(center);
+                  map.setZoom(15);
+                }}
               />
-            </Autocomplete>
-          </Col>
-          <Col xs="auto">
-            <Button type="submit" className="mb-2" onClick={calculateRoute}>
-              Submit
-            </Button>
-          </Col>
-
-          <FontAwesomeIcon
-            icon="fa-trash"
-            className="p-2 fa-2lg"
-            onClick={clearRoute}
-            style={{ color: "#0565EE" }}
-          />
-          <p>Distance: {distance} </p>
-          <p>Duration: {duration} </p>
-
-          <FontAwesomeIcon
-            icon="fa-trash"
-            className="p-2 fa-2lg"
-            onClick={() => {
-              console.log("click");
-              map.panTo(center);
-              map.setZoom(15);
-            }}
-            style={{ color: "#0565EE" }}
-          />
-        </Row>
-      </Form>
+            </Col>
+          </Row>
+        </div>
+      </div>
     </div>
   );
 }
