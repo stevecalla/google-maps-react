@@ -4,9 +4,10 @@ import './App.css';
 import Map from './components/Map';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faLocation } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faTrash);
+
+library.add(faTrash, faLocation);
 
 function App() {
   return (
