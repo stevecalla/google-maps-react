@@ -43,7 +43,7 @@ function SearchBar({
         </Autocomplete>
         <Autocomplete>
           <Form.Control
-            className="mb-2"
+            className=""
             type="search"
             required
             id="destination"
@@ -56,7 +56,8 @@ function SearchBar({
         <div className="d-flex justify-content-between pt-1">
           <Button
             type="submit"
-            className="mb-2 ml-2"
+            className="mb-1 ml-2"
+            style={{ marginLeft: "5px"}}
             // onClick={calculateRoute}
             // onDoubleClick={() => setOpen(!open)}
             onClick={() => {
@@ -67,7 +68,7 @@ function SearchBar({
             aria-expanded={open}
             size="sm"
           >
-            Submit
+            {open ? "Collapse" : "Submit"}
           </Button>
           <FontAwesomeIcon
             icon="fa-trash"
@@ -90,7 +91,7 @@ function SearchBar({
         <div id="collapse-search-bar">
           <Autocomplete>
             <Form.Control
-              className="mb-2"
+              className="mb-1"
               type="text"
               id="distance"
               name="distance"
@@ -102,7 +103,7 @@ function SearchBar({
           </Autocomplete>
           <Autocomplete>
             <Form.Control
-              className="mb-2"
+              className=""
               type="text"
               id="duration"
               name="duration"
@@ -112,9 +113,9 @@ function SearchBar({
               size="sm"
             />
           </Autocomplete>
-          <div className="d-flex justify-content-between pt-1">
+          <div className="d-flex justify-content-between">
             <Button style={{ visibility: "hidden" }} type="submit" size="sm">
-              Submit
+              {open ? "Collapse" : "Submit"}
             </Button>
             <FontAwesomeIcon
               icon="fa-location"
