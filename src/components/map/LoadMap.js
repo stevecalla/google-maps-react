@@ -28,8 +28,14 @@ export const LoadMap = ({ center, directionsResponse, setMap }) => {
         trafficLayer.setMap(map);
       }}
     >
+      {directionsResponse?.routes[2] && (
+        <DirectionsRenderer directions={directionsResponse} routeIndex={2} options={{ "draggable": true, "clickable": false, "polylineOptions": {"strokeColor": "yellow"}, "markers": false }}  />
+      )}
+      {directionsResponse?.routes[1] && (
+        <DirectionsRenderer directions={directionsResponse} routeIndex={1} options={{ "draggable": true, "clickable": true, "polylineOptions": {"strokeColor": "gray"} }} />
+      )}
       {directionsResponse && (
-        <DirectionsRenderer directions={directionsResponse} />
+        <DirectionsRenderer directions={directionsResponse} routeIndex={0} onDirectionsChanged={console.log('changed')} options={{ "draggable": true }} />
       )}
     </GoogleMap>
   );
@@ -43,3 +49,9 @@ const mapStyle = {
   top: "0",
   border: "1px solid black",
 };
+
+var polylineOptionsActual = {
+  strokeColor: '#FF0000',
+  strokeOpacity: 1.0,
+  strokeWeight: 10
+  };

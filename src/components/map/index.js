@@ -40,13 +40,16 @@ function Map() {
     const results = await directionsService.route({
       origin: origin.current.value,
       destination: destination.current.value,
-
       // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
-      // eslint-disable-next-line no-undef
-      // waypoints: waypts,
       optimizeWaypoints: true,
+      provideRouteAlternatives: true,
+      // alternatives: true,
     });
+    // console.log(results);
+    // console.log(results.routes[0].legs[0]);
+    // console.log(results.routes[0].legs[0].steps[0].instructions);
+
     setDirectionsResponse(results);
     setDistance(results.routes[0].legs[0].distance.text);
     setDuration(results.routes[0].legs[0].duration.text);
@@ -62,7 +65,7 @@ function Map() {
 
   return (
     <div style={containerStyle} className="d-flex align-items-center">
-    
+
       <LoadMap
         center={center}
         directionsResponse={directionsResponse}

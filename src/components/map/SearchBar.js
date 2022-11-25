@@ -25,7 +25,6 @@ export const SearchBar = ({
               <Form.Control
                 className="mb-2"
                 type="search"
-                autocomplete
                 required
                 id="origin"
                 name="origin"
@@ -39,7 +38,6 @@ export const SearchBar = ({
               <Form.Control
                 className="mb-2"
                 type="search"
-                autocomplete
                 required
                 id="destination"
                 name="destination"
