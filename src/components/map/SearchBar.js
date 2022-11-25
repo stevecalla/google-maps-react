@@ -25,131 +25,119 @@ function SearchBar({
   //   console.log(open)
   //   calculateRoute();
   // }, [open, calculateRoute])
-  
 
   return (
-    <div style={formStyle} className="d-flex flex-column p-2 rounded">
+    <div style={formStyle} className="">
       <Form>
-        <Row>
-          <Col xs="auto">
-            <Autocomplete>
-              <Form.Control
-                className="mb-2"
-                type="search"
-                required
-                id="origin"
-                name="origin"
-                placeholder="Origin"
-                ref={origin}
-              />
-            </Autocomplete>
-          </Col>
-          <Col xs="auto">
-            <Autocomplete>
-              <Form.Control
-                className="mb-2"
-                type="search"
-                required
-                id="destination"
-                name="destination"
-                placeholder="Destination"
-                ref={destination}
-              />
-            </Autocomplete>
-          </Col>
-          <Col xs="auto">
-            <Button 
-              type="submit" 
-              className="mb-2" 
-              // onClick={calculateRoute}
-              // onDoubleClick={() => setOpen(!open)}
-              onClick={() => {
-                calculateRoute();
-                setOpen(!open);
-              }}
-              aria-controls="example-collapse-text"
-              aria-expanded={open}
-            >
-              Submit
-            </Button>
-          </Col>
-          <Col xs="auto">
-            <FontAwesomeIcon
-              icon="fa-trash"
-              className="p-2 fa-xl"
-              title="GitHub"
-              // style={{ color: "#0565EE" }}
-              style={{ color: "grey" }}
-              // onClick={clearRoute}
-              onClick={() => {
-                clearRoute();
-                setOpen(false);
-              }}
-              aria-controls="example-collapse-text"
-              aria-expanded={open}
-            />
-          </Col>
-        </Row>
+        <Autocomplete>
+          <Form.Control
+            className="ml-5"
+            type="search"
+            required
+            id="origin"
+            name="origin"
+            placeholder="Origin"
+            ref={origin}
+            size="sm"
+          />
+        </Autocomplete>
+        <Autocomplete>
+          <Form.Control
+            className="mb-2"
+            type="search"
+            required
+            id="destination"
+            name="destination"
+            placeholder="Destination"
+            ref={destination}
+            size="sm"
+          />
+        </Autocomplete>
+        <div className="d-flex justify-content-between pt-1">
+          <Button
+            type="submit"
+            className="mb-2 ml-2"
+            // onClick={calculateRoute}
+            // onDoubleClick={() => setOpen(!open)}
+            onClick={() => {
+              calculateRoute();
+              setOpen(!open);
+            }}
+            aria-controls="collapse-search-bar"
+            aria-expanded={open}
+            size="sm"
+          >
+            Submit
+          </Button>
+          <FontAwesomeIcon
+            icon="fa-trash"
+            className="pt-2 px-2 fa-lg"
+            title="GitHub"
+            // style={{ color: "#0565EE" }}
+            style={{ color: "grey" }}
+            // onClick={clearRoute}
+            onClick={() => {
+              clearRoute();
+              setOpen(false);
+            }}
+            aria-controls="collapse-search-bar"
+            aria-expanded={open}
+          />
+        </div>
       </Form>
 
       <Collapse in={open}>
-        <div id="example-collapse-text">
-          <Row>
-            <Col xs="auto">
-              <Autocomplete>
-                <Form.Control
-                  className="mb-2"
-                  type="text"
-                  id="distance"
-                  name="distance"
-                  placeholder="Distance"
-                  value={distance && `Distance: ${distance}`}
-                  disabled
-                />
-              </Autocomplete>
-            </Col>
-            <Col xs="auto">
-              <Autocomplete>
-                <Form.Control
-                  className="mb-2"
-                  type="text"
-                  id="duration"
-                  name="duration"
-                  placeholder="Duration"
-                  value={distance && `Duration: ${duration}`}
-                  disabled
-                />
-              </Autocomplete>
-            </Col>
-            <Col xs="auto">
-              <Button style={{ visibility: "hidden" }} type="submit">
-                Submit
-              </Button>
-            </Col>
-            <Col xs="auto">
-              <FontAwesomeIcon
-                icon="fa-location"
-                className="p-2 fa-xl"
-                // style={{ color: "#0565EE" }}
-                style={{ color: "grey" }}
-                onClick={() => {
-                  map.panTo(center);
-                  map.setZoom(15);
-                }}
-              />
-            </Col>
-          </Row>
+        <div id="collapse-search-bar">
+          <Autocomplete>
+            <Form.Control
+              className="mb-2"
+              type="text"
+              id="distance"
+              name="distance"
+              placeholder="Distance"
+              value={distance && `Distance: ${distance}`}
+              disabled
+              size="sm"
+            />
+          </Autocomplete>
+          <Autocomplete>
+            <Form.Control
+              className="mb-2"
+              type="text"
+              id="duration"
+              name="duration"
+              placeholder="Duration"
+              value={distance && `Duration: ${duration}`}
+              disabled
+              size="sm"
+            />
+          </Autocomplete>
+          <div className="d-flex justify-content-between pt-1">
+            <Button style={{ visibility: "hidden" }} type="submit" size="sm">
+              Submit
+            </Button>
+            <FontAwesomeIcon
+              icon="fa-location"
+              className="p-2 fa-xl"
+              // style={{ color: "#0565EE" }}
+              style={{ color: "grey" }}
+              onClick={() => {
+                map.panTo(center);
+                map.setZoom(15);
+              }}
+            />
+          </div>
         </div>
       </Collapse>
-
     </div>
   );
-};
+}
 
 export default memo(SearchBar);
 
 const formStyle = {
-  top: "75px",
+  top: "95px",
+  left: "10px",
   position: "absolute",
   zIndex: "1",
   backgroundColor: "white",
