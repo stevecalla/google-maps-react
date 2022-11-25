@@ -3,7 +3,7 @@ import { useJsApiLoader } from "@react-google-maps/api";
 
 import Spinner from "react-bootstrap/Spinner";
 
-import { SearchBar } from "./SearchBar";
+import SearchBar from "./SearchBar";
 import { LoadMap } from "./LoadMap";
 
 const center = { lat: 40.1672, lng: -105.1019 };
@@ -28,8 +28,8 @@ function Map() {
     return <Spinner animation="border" />;
   }
 
-  async function calculateRoute(event) {
-    event.preventDefault();
+  async function calculateRoute() {
+    // event.preventDefault();
     if (origin.current.value === "" || destination.current.value === "") {
       return;
     }
@@ -65,7 +65,6 @@ function Map() {
 
   return (
     <div style={containerStyle} className="d-flex align-items-center">
-
       <LoadMap
         center={center}
         directionsResponse={directionsResponse}
@@ -82,6 +81,7 @@ function Map() {
         map={map}
         origin={origin}
       />
+
     </div>
   );
 }
