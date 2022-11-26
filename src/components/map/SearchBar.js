@@ -73,7 +73,7 @@ function SearchBar({
           <FontAwesomeIcon
             icon="fa-trash"
             className="pt-2 px-2 fa-lg"
-            title="GitHub"
+            title="Trash"
             // style={{ color: "#0565EE" }}
             style={{ color: "grey" }}
             // onClick={clearRoute}
@@ -120,6 +120,7 @@ function SearchBar({
             <FontAwesomeIcon
               icon="fa-location"
               className="p-2 fa-xl"
+              title="Center"
               // style={{ color: "#0565EE" }}
               style={{ color: "grey" }}
               onClick={() => {

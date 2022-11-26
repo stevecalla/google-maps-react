@@ -8,6 +8,7 @@ import { LoadMap } from "./LoadMap";
 
 import seed from "./responseSeed";
 import { DirectionsPanel } from "./DirectionsPanel";
+import { Share } from "./Share";
 
 const center = { lat: 40.1672, lng: -105.1019 };
 const libraries = ["places"];
@@ -115,9 +116,12 @@ function Map({ originDb, destinationDb }) {
           map={map}
           origin={origin}
         />
+
+        <Share />
+        
       </div>
       {/* <details id="panel"> */}
-        <DirectionsPanel />
+      <DirectionsPanel />
       {/* </details> */}
     </div>
   );

@@ -4,9 +4,9 @@ import './App.css';
 import Map from './components/Map';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faLocation } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faLocation, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faTrash, faLocation);
+library.add(faTrash, faLocation, faShareNodes);
 
 function App() {
   const [originDb, setOriginDb] = useState('Boulder, CO, USA');
