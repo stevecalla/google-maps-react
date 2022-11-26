@@ -6,10 +6,17 @@ import Spinner from "react-bootstrap/Spinner";
 import SearchBar from "./SearchBar";
 import { LoadMap } from "./LoadMap";
 
+import seed from "./response";
+
 const center = { lat: 40.1672, lng: -105.1019 };
 const libraries = ["places"];
 
-function Map() {
+function Map({ originDb, destinationDb }) {
+  // console.log({ originDb }, { destinationDb })
+  // const [originTest, setOriginTest] = useState();
+  // const [destinationTest, setDestinationTest] = useState();
+  console.log({seed});
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -21,39 +28,65 @@ function Map() {
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
 
-  const origin = useRef();
-  const destination = useRef();
+  let origin = useRef();
+  let destination = useRef();
 
   if (!isLoaded) {
     return <Spinner animation="border" />;
   }
 
-  async function calculateRoute() {
-    // event.preventDefault();
-    if (origin.current.value === "" || destination.current.value === "") {
-      return;
-    }
+  // if ( originDb && destinationDb ) {
+  //   calculateRoute();
+  // }
 
-    // eslint-disable-next-line no-undef
-    const directionsService = new google.maps.DirectionsService();
-
-    const results = await directionsService.route({
-      origin: origin.current.value,
-      destination: destination.current.value,
-      // eslint-disable-next-line no-undef
-      travelMode: google.maps.TravelMode.DRIVING,
-      optimizeWaypoints: true,
-      provideRouteAlternatives: true,
-      // alternatives: true,
-    });
-    // console.log(results);
-    // console.log(results.routes[0].legs[0]);
-    // console.log(results.routes[0].legs[0].steps[0].instructions);
-
-    setDirectionsResponse(results);
-    setDistance(results.routes[0].legs[0].distance.text);
-    setDuration(results.routes[0].legs[0].duration.text);
+  async function calculateRoute(event) {
+    event.preventDefault();
+    setDirectionsResponse(seed);
+    setDistance(seed.routes[0].legs[0].distance.text);
+    setDuration(seed.routes[0].legs[0].duration.text);
   }
+
+  // async function calculateRoute(event) {
+  //   event && event.preventDefault();
+  //   if (origin.current?.value === "" || destination.current?.value === "") {
+  //     return;
+  //   }
+
+  //   let originSubmitted = "";
+  //   let destinationSubmitted = "";
+
+  //   console.log( origin.current?.value );
+  //   console.log( destination.current?.value );
+  //   console.log({ originDb });
+  //   console.log({ destinationDb })
+
+
+  //   if (origin.current?.value && destination.current?.value) {
+  //     originSubmitted = origin.current?.value;
+  //     destinationSubmitted = destination.current?.value;
+  //   } else {
+  //     originSubmitted = originDb;
+  //     destinationSubmitted = destinationDb;
+  //   }
+
+  //   // eslint-disable-next-line no-undef
+  //   const directionsService = new google.maps.DirectionsService();
+
+  //   const results = await directionsService.route({
+  //     // origin: originDb || origin.current.value,
+  //     // destination: destinationDb || destination.current.value,
+  //     origin: originSubmitted,
+  //     destination: destinationSubmitted,
+  //     // eslint-disable-next-line no-undef
+  //     travelMode: google.maps.TravelMode.DRIVING,
+  //     // optimizeWaypoints: true,
+  //     // provideRouteAlternatives: true,
+  //   });
+
+  //   setDirectionsResponse(results);
+  //   setDistance(results.routes[0].legs[0].distance.text);
+  //   setDuration(results.routes[0].legs[0].duration.text);
+  // }
 
   function clearRoute() {
     setDirectionsResponse(null);

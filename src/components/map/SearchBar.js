@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, memo } from "react";
 import { Autocomplete } from "@react-google-maps/api";
 // import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -58,12 +58,12 @@ function SearchBar({
             type="submit"
             className="mb-1 ml-2"
             style={{ marginLeft: "5px"}}
-            // onClick={calculateRoute}
-            // onDoubleClick={() => setOpen(!open)}
-            onClick={() => {
-              calculateRoute();
-              setOpen(!open);
-            }}
+            onClick={calculateRoute}
+            onDoubleClick={() => setOpen(!open)}
+            // onClick={() => {
+            //   calculateRoute();
+            //   setOpen(!open);
+            // }}
             aria-controls="collapse-search-bar"
             aria-expanded={open}
             size="sm"
