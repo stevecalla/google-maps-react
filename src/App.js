@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import Map from './components/Map';
+import Map from './components/Map/index';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTrash, faLocation, faShareNodes, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
