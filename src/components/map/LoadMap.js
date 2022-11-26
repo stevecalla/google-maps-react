@@ -1,7 +1,11 @@
 import React from "react";
 import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
+import { DirectionsPanel } from "./DirectionsPanel";
 
 export const LoadMap = ({ center, directionsResponse, setMap }) => {
+  console.log({directionsResponse})
+
+  
   return (
     <GoogleMap
       center={center}
@@ -28,7 +32,7 @@ export const LoadMap = ({ center, directionsResponse, setMap }) => {
         trafficLayer.setMap(map);
       }}
     >
-      {directionsResponse?.routes[2] && (
+      {/* {directionsResponse?.routes[2] && (
         <DirectionsRenderer
           directions={directionsResponse}
           routeIndex={2}
@@ -39,8 +43,8 @@ export const LoadMap = ({ center, directionsResponse, setMap }) => {
             markers: false,
           }}
         />
-      )}
-      {directionsResponse?.routes[1] && (
+      )} */}
+      {/* {directionsResponse?.routes[1] && (
         <DirectionsRenderer
           directions={directionsResponse}
           routeIndex={1}
@@ -50,13 +54,14 @@ export const LoadMap = ({ center, directionsResponse, setMap }) => {
             polylineOptions: { strokeColor: "gray" },
           }}
         />
-      )}
+      )} */}
       {directionsResponse && (
         <DirectionsRenderer
           directions={directionsResponse}
           routeIndex={0}
           onDirectionsChanged={console.log("changed")}
           options={{ draggable: true }}
+          panel={document.getElementById("panel")}
         />
       )}
     </GoogleMap>
