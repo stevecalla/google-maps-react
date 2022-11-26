@@ -4,7 +4,7 @@ import './App.css';
 import Map from './components/Map';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faLocation, faShareNodes, faXmark, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faLocation, faShareNodes, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faTrash, faLocation, faShareNodes, faXmarkCircle);
 
