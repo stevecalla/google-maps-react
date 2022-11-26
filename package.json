@@ -1,7 +1,7 @@
 {
   "name": "client-map",
   "version": "0.1.0",
-  "private": true,,
+  "private": true,
   "engines": {
     "node": "16.16",
     "npm": "8.11"
