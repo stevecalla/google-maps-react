@@ -1,5 +1,6 @@
 import React from "react";
 import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
+import { DirectionsPanel } from "./DirectionsPanel";
 
 export const LoadMap = ({ center, directionsResponse, setMap }) => {
   console.log({directionsResponse})
@@ -60,6 +61,7 @@ export const LoadMap = ({ center, directionsResponse, setMap }) => {
           routeIndex={0}
           onDirectionsChanged={console.log("changed")}
           options={{ draggable: true }}
+          panel={document.getElementById("panel")}
         />
       )}
     </GoogleMap>

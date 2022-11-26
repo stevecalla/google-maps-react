@@ -6,7 +6,8 @@ import Spinner from "react-bootstrap/Spinner";
 import SearchBar from "./SearchBar";
 import { LoadMap } from "./LoadMap";
 
-import seed from "./response";
+import seed from "./responseSeed";
+import { DirectionsPanel } from "./DirectionsPanel";
 
 const center = { lat: 40.1672, lng: -105.1019 };
 const libraries = ["places"];
@@ -15,7 +16,7 @@ function Map({ originDb, destinationDb }) {
   // console.log({ originDb }, { destinationDb })
   // const [originTest, setOriginTest] = useState();
   // const [destinationTest, setDestinationTest] = useState();
-  console.log({seed});
+  console.log({ seed });
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -60,7 +61,6 @@ function Map({ originDb, destinationDb }) {
   //   console.log({ originDb });
   //   console.log({ destinationDb })
 
-
   //   if (origin.current?.value && destination.current?.value) {
   //     originSubmitted = origin.current?.value;
   //     destinationSubmitted = destination.current?.value;
@@ -97,24 +97,28 @@ function Map({ originDb, destinationDb }) {
   }
 
   return (
-    <div style={containerStyle} className="d-flex align-items-center">
-      <LoadMap
-        center={center}
-        directionsResponse={directionsResponse}
-        setMap={setMap}
-      />
+    <div>
+      <div style={containerStyle} className="d-flex align-items-center">
+        <LoadMap
+          center={center}
+          directionsResponse={directionsResponse}
+          setMap={setMap}
+        />
 
-      <SearchBar
-        calculateRoute={calculateRoute}
-        center={center}
-        clearRoute={clearRoute}
-        destination={destination}
-        distance={distance}
-        duration={duration}
-        map={map}
-        origin={origin}
-      />
-
+        <SearchBar
+          calculateRoute={calculateRoute}
+          center={center}
+          clearRoute={clearRoute}
+          destination={destination}
+          distance={distance}
+          duration={duration}
+          map={map}
+          origin={origin}
+        />
+      </div>
+      {/* <details id="panel"> */}
+        <DirectionsPanel />
+      {/* </details> */}
     </div>
   );
 }
@@ -124,6 +128,6 @@ export default memo(Map);
 const containerStyle = {
   flexDirection: "column",
   width: "100vw",
-  height: "100vh",
+  height: "93vh",
   position: "relative",
 };
