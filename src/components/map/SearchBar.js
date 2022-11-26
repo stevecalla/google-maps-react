@@ -1,9 +1,6 @@
 import React, { useState, memo } from "react";
 import { Autocomplete } from "@react-google-maps/api";
-// import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Button from "react-bootstrap/Button";
@@ -20,11 +17,6 @@ function SearchBar({
   origin,
 }) {
   const [open, setOpen] = useState(false);
-
-  // useEffect(() => {
-  //   console.log(open)
-  //   calculateRoute();
-  // }, [open, calculateRoute])
 
   return (
     <div style={formStyle} className="">
@@ -71,10 +63,10 @@ function SearchBar({
             {open ? "Collapse" : "Submit"}
           </Button>
           <FontAwesomeIcon
-            icon="fa-trash"
+            icon="fa-xmark-circle"
             className="pt-2 px-2 fa-lg"
-            title="GitHub"
-            // style={{ color: "#0565EE" }}
+            title="Delete"
+            alt="Delete input"
             style={{ color: "grey" }}
             // onClick={clearRoute}
             onClick={() => {
@@ -120,6 +112,8 @@ function SearchBar({
             <FontAwesomeIcon
               icon="fa-location"
               className="p-2 fa-xl"
+              title="Center"
+              alt="Center Map"
               // style={{ color: "#0565EE" }}
               style={{ color: "grey" }}
               onClick={() => {
@@ -142,4 +136,5 @@ const formStyle = {
   position: "absolute",
   zIndex: "1",
   backgroundColor: "white",
+  cursor: "grab",
 };
