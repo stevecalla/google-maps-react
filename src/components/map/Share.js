@@ -3,8 +3,10 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const Share = () => { //section need to pass in location info
+export const Share = () => {
+  //section need to pass in location info
   const [show, setShow] = useState(false);
+  const [tinyURI, setTinyURI] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -13,45 +15,45 @@ export const Share = () => { //section need to pass in location info
   let destination = "Longmont, CO, USA"; //destination
 
   let encodedURI = "";
-  const [ tinyURI, setTinyURI ] = useState('');
 
   const webShareAPI = () => {
     // create map URL
-
     const uri = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
     encodedURI = encodeURI(uri);
 
     // fetch tinyURL
-    const tinyUrlApiPath =  `https://api.tinyurl.com/create?api_token=${process.env.REACT_APP_TINY_URL_KEY}`
+    const tinyUrlApiPath = `https://api.tinyurl.com/create?api_token=${process.env.REACT_APP_TINY_URL_KEY}`; // set tinyurl api call path
 
-    postData(tinyUrlApiPath)
-      .then((data) => {
-        setTinyURI(data.data.tiny_url);
+    postData(tinyUrlApiPath).then((data) => {
+      setTinyURI(data.data.tiny_url);
+      console.log({data})
+      console.log(data.data.tiny_url)
     });
 
-    // launch share
+    console.log(tinyURI)
+
+    shareNavigator();
+    // setTimeout(() => {
+    // }, 5000);
+
+  };
+
+  function shareNavigator() {
     if (navigator.share) {
+
       console.log("true");
+
       navigator
-        .share({
-          text: `Pristine Clean Directions
-          
-          Job Location: ${destination}
-
-          Map Link: ${tinyURI}
-
-          Cleaning at it's finest!!
-
-          `,
-        })
+        .share({iphoneInfo})
         .then(() => console.log("Successful share"))
         .catch((error) => console.log("Error sharing", error));
     } else {
       // Launch modal to send email if navigator share feature doesn't exist
       handleShow();
     }
-  };
+  }
 
+  let iphoneInfo = `Pristine Clean Directions, Job Location: ${destination}, Map Link: ${tinyURI}, Cleaning at it's finest!!`;
 
   let emailInfo = `mailto:?subject=Pristine Clean Job Directions: ${destination}&body=Directions from ${origin} to ${destination}. Map Link: ${tinyURI}`;
 
@@ -74,8 +76,6 @@ export const Share = () => { //section need to pass in location info
     });
     return response.json(); // parses JSON response into native JavaScript objects
   }
-
-
 
   return (
     <>
