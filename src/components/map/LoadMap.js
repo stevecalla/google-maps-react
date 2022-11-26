@@ -1,6 +1,5 @@
 import React from "react";
 import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
-import { DirectionsPanel } from "./DirectionsPanel";
 
 export const LoadMap = ({ center, directionsResponse, setMap }) => {
   console.log({directionsResponse})

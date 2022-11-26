@@ -120,9 +120,9 @@ function Map({ originDb, destinationDb }) {
         <Share />
         
       </div>
-      {/* <details id="panel"> */}
+      
       <DirectionsPanel />
-      {/* </details> */}
+      
     </div>
   );
 }
