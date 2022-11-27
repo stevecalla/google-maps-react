@@ -3,13 +3,12 @@ import { useJsApiLoader } from "@react-google-maps/api";
 
 import Spinner from "react-bootstrap/Spinner";
 
-import SearchBar from "./SearchBar";
+import SearchIcon from "./SearchIcon";
 import { LoadMap } from "./LoadMap";
 
 import seed from "./responseSeed";
 import { DirectionsPanel } from "./DirectionsPanel";
 import { Share } from "./Share";
-import { SearchIcon } from "./SearchIcon";
 
 const center = { lat: 40.1672, lng: -105.1019 };
 const libraries = ["places"];
@@ -107,7 +106,7 @@ function Map({ originDb, destinationDb }) {
           setMap={setMap}
         />
 
-        <SearchBar
+        <SearchIcon
           calculateRoute={calculateRoute}
           center={center}
           clearRoute={clearRoute}
@@ -117,8 +116,6 @@ function Map({ originDb, destinationDb }) {
           map={map}
           origin={origin}
         />
-
-        <SearchIcon />
 
         <div style={lineBreakStyle}></div>
 

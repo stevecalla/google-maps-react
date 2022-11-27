@@ -99,8 +99,8 @@ export const Share = () => {
         </Modal.Header>
         <Modal.Body className="d-flex justify-content-center">
           <Button
-            className="btn btn-secondary"
-            variant="secondary"
+            className="btn btn-primary"
+            variant="primary"
             title="Email share"
             onClick={() => window.open(emailShareData)}
           >
@@ -118,7 +118,6 @@ const shareStyle = {
   bottom: "60px",
   left: "12px",
   padding: "11px",
-  // color: "#0E6DFD",
   color: "#666666",
   backgroundColor: "white",
   cursor: "grab",
