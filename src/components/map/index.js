@@ -3,7 +3,7 @@ import { useJsApiLoader } from "@react-google-maps/api";
 
 import Spinner from "react-bootstrap/Spinner";
 
-import SearchBar from "./SearchBar";
+import SearchIcon from "./SearchIcon";
 import { LoadMap } from "./LoadMap";
 
 import seed from "./responseSeed";
@@ -106,7 +106,7 @@ function Map({ originDb, destinationDb }) {
           setMap={setMap}
         />
 
-        <SearchBar
+        <SearchIcon
           calculateRoute={calculateRoute}
           center={center}
           clearRoute={clearRoute}
@@ -117,8 +117,10 @@ function Map({ originDb, destinationDb }) {
           origin={origin}
         />
 
+        <div style={lineBreakStyle}></div>
+
         <Share />
-        
+
       </div>
       
       <DirectionsPanel />
@@ -135,3 +137,17 @@ const containerStyle = {
   height: "93vh",
   position: "relative",
 };
+
+const lineBreakStyle = {
+  heigth: "1px",
+  width: "35px",
+  bottom: "62px",
+  left: "18px",
+  padding: "1px",
+  color: "grey",
+  backgroundColor: "lightgrey",
+  position: "absolute",
+  zIndex: "2",
+  borderRadius: "3px",
+};
+

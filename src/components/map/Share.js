@@ -86,7 +86,7 @@ export const Share = () => {
     <>
       <FontAwesomeIcon
         icon="fa-share-nodes"
-        className="fa-2xl"
+        className="fa-xl"
         style={shareStyle}
         onClick={() => webShareAPI()}
         title="Share"
@@ -95,16 +95,16 @@ export const Share = () => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title className="e">Email Directions</Modal.Title>
+          <Modal.Title className="e">Directions To Location</Modal.Title>
         </Modal.Header>
         <Modal.Body className="d-flex justify-content-center">
           <Button
-            className="btn btn-secondary"
-            variant="secondary"
+            className="btn btn-primary"
+            variant="primary"
             title="Email share"
             onClick={() => window.open(emailShareData)}
           >
-            Click to Send Directions via Email
+            Click to Email the Directions
           </Button>
         </Modal.Body>
       </Modal>
@@ -113,12 +113,15 @@ export const Share = () => {
 };
 
 const shareStyle = {
-  bottom: "200px",
-  padding: "6px",
-  right: "12px",
-  color: "#0E6DFD",
+  height: "22px",
+  width: "22px",
+  bottom: "60px",
+  left: "12px",
+  padding: "11px",
+  color: "#666666",
   backgroundColor: "white",
   cursor: "grab",
   position: "absolute",
-  zIndex: "3",
+  zIndex: "1",
+  boxShadow: "rgb(0 0 0 / 30%) 0px 1px 0px -1px",
 };
