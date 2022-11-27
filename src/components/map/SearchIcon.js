@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "react-bootstrap/Button";
 import Collapse from "react-bootstrap/Collapse";
 
-function SearchBar({
+function SearchIcon({
   calculateRoute,
   center,
   clearRoute,
@@ -23,7 +23,7 @@ function SearchBar({
       <FontAwesomeIcon
         icon="fa-search"
         className="fa-duotone fa-xl"
-        style={shareStyle}
+        style={searchStyle}
         onClick={() => setOpen(!open)}
         title="Search"
         alt="Share my profile"
@@ -98,30 +98,18 @@ function SearchBar({
               </Button>
 
               <FontAwesomeIcon
-                  icon="fa-xmark-circle"
-                  className="pt-1 px-2 fa-xl"
-                  title="Delete"
-                  alt="Delete input"
-                  style={{ color: "grey" }}
-                  onClick={() => {
-                    clearRoute();
-                    setOpen(false);
-                  }}
-                  aria-controls="collapse-search-bar"
-                  aria-expanded={open}
-                />
-                
-              {/* <FontAwesomeIcon
-                icon="fa-location"
-                className="pt-2 px-2 pb-1 fa-xl"
-                title="Center"
-                alt="Center Map"
+                icon="fa-xmark-circle"
+                className="pt-1 px-2 fa-xl"
+                title="Delete"
+                alt="Delete input"
                 style={{ color: "grey" }}
                 onClick={() => {
-                  map.panTo(center);
-                  map.setZoom(15);
+                  clearRoute();
+                  setOpen(false);
                 }}
-              /> */}
+                aria-controls="collapse-search-bar"
+                aria-expanded={open}
+              />
             </div>
           </div>
         </Collapse>
@@ -130,30 +118,30 @@ function SearchBar({
   );
 }
 
-export default memo(SearchBar);
+export default memo(SearchIcon);
 
 const formStyle = {
-  width: "165gipx",
+  width: "165px",
   top: "95px",
   left: "10px",
   position: "absolute",
   zIndex: "1",
   backgroundColor: "white",
   cursor: "grab",
-  boxShadow: "rgb(0 0 0 / 30%) 0px 1px 4px -1px",
+  boxShadow: "rgb(0 0 0 / 30%) 4px 4px 4px -1px",
 };
 
-const shareStyle = {
-  height: "22px",
-  width: "22px",
+const searchStyle = {
   bottom: "22px",
   left: "12px",
-  padding: "10px",
-  paddingLeft: "12px",
+  height: "22px",
+  width: "22px",
+  padding: "20px 10px 10px 12px",
   color: "#666666",
   backgroundColor: "white",
   cursor: "grab",
   position: "absolute",
   zIndex: "1",
+  borderRadius: "2px",
   boxShadow: "rgb(0 0 0 / 30%) 0px 1px 4px -1px",
 };

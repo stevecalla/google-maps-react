@@ -9,6 +9,7 @@ import { LoadMap } from "./LoadMap";
 import seed from "./responseSeed";
 import { DirectionsPanel } from "./DirectionsPanel";
 import { Share } from "./Share";
+import { CenterIcon } from "./CenterIcon";
 
 const center = { lat: 40.1672, lng: -105.1019 };
 const libraries = ["places"];
@@ -106,6 +107,12 @@ function Map({ originDb, destinationDb }) {
           setMap={setMap}
         />
 
+        <Share />
+
+        <CenterIcon center={center} map={map} />
+
+        <div style={lineBreakStyle}></div>
+
         <SearchIcon
           calculateRoute={calculateRoute}
           center={center}
@@ -117,14 +124,9 @@ function Map({ originDb, destinationDb }) {
           origin={origin}
         />
 
-        <div style={lineBreakStyle}></div>
-
-        <Share />
-
       </div>
-      
+
       <DirectionsPanel />
-      
     </div>
   );
 }
@@ -140,14 +142,13 @@ const containerStyle = {
 
 const lineBreakStyle = {
   heigth: "1px",
-  width: "35px",
-  bottom: "62px",
+  width: "33px",
+  bottom: "59px",
   left: "18px",
   padding: "1px",
-  color: "grey",
-  backgroundColor: "lightgrey",
+  color: "#E6E6E6",
+  backgroundColor: "#E6E6E6",
   position: "absolute",
   zIndex: "2",
   borderRadius: "3px",
 };
-

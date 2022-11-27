@@ -35,16 +35,15 @@ export const Share = () => {
     shareNavigator();
     // setTimeout(() => {
     // }, 5000);
-
   };
 
   async function shareNavigator() {
     if (navigator.share) {
       try {
-        await navigator.share(shareData)
+        await navigator.share(shareData);
         console.log("Successful share");
       } catch (error) {
-        console.log("Error sharing", error)
+        console.log("Error sharing", error);
       }
     } else {
       // Launch modal to send email if navigator share feature doesn't exist
@@ -58,7 +57,7 @@ export const Share = () => {
     title: `Pristine Clean Job Directions: ${destination}`,
     text: `Pristine Clean Directions\n\nJob Location: ${destination}\n\nMap Link: ${tinyURI}\n\nCleaning at it's finest!!`,
     url: tinyURI,
-  }
+  };
 
   let emailShareData = `mailto:?subject=Pristine Clean Job Directions: ${destination}&body=Directions from ${origin} to ${destination}. Map Link: ${tinyURI}`;
 
@@ -86,16 +85,20 @@ export const Share = () => {
     <>
       <FontAwesomeIcon
         icon="fa-share-nodes"
-        className="fa-xl"
+        className="fa-2xl"
         style={shareStyle}
         onClick={() => webShareAPI()}
         title="Share"
         alt="Share my profile"
       />
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal 
+        size="sm" 
+        show={show} 
+        onHide={handleClose}
+      >
         <Modal.Header closeButton>
-          <Modal.Title className="e">Directions To Location</Modal.Title>
+          <Modal.Title className="">Directions</Modal.Title>
         </Modal.Header>
         <Modal.Body className="d-flex justify-content-center">
           <Button
@@ -113,15 +116,16 @@ export const Share = () => {
 };
 
 const shareStyle = {
+  bottom: "128px",
+  left: "12px",
   height: "22px",
   width: "22px",
-  bottom: "60px",
-  left: "12px",
   padding: "11px",
-  color: "#666666",
+  color: "#0E6DFD",
   backgroundColor: "white",
   cursor: "grab",
   position: "absolute",
   zIndex: "1",
-  boxShadow: "rgb(0 0 0 / 30%) 0px 1px 0px -1px",
+  borderRadius: "2px",
+  boxShadow: "rgb(0 0 0 / 30%) 0px 1px 4px -1px",
 };
