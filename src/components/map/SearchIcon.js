@@ -133,6 +133,7 @@ function SearchBar({
 export default memo(SearchBar);
 
 const formStyle = {
+  width: "165gipx",
   top: "95px",
   left: "10px",
   position: "absolute",
