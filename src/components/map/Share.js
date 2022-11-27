@@ -26,11 +26,11 @@ export const Share = () => {
 
     postData(tinyUrlApiPath).then((data) => {
       setTinyURI(data.data.tiny_url);
-      console.log({data})
-      console.log(data.data.tiny_url)
+      // console.log({data})
+      // console.log(data.data.tiny_url)
     });
 
-    console.log(tinyURI)
+    // console.log(tinyURI)
 
     shareNavigator();
     // setTimeout(() => {
@@ -38,22 +38,29 @@ export const Share = () => {
 
   };
 
-  function shareNavigator() {
+  async function shareNavigator() {
     if (navigator.share) {
-      console.log("true");
-      navigator
-        .share({ text: iphoneInfo})
-        .then(() => console.log("Successful share"))
-        .catch((error) => console.log("Error sharing", error));
+      try {
+        await navigator.share(shareData)
+        console.log("Successful share");
+      } catch (error) {
+        console.log("Error sharing", error)
+      }
     } else {
       // Launch modal to send email if navigator share feature doesn't exist
       handleShow();
     }
   }
 
-  let iphoneInfo = `Pristine Clean Directions\n\nJob Location: ${destination}\n\nMap Link: ${tinyURI}\n\nCleaning at it's finest!!`;
+  // let iphoneInfo = `Pristine Clean Directions\n\nJob Location: ${destination}\n\nMap Link: ${tinyURI}\n\nCleaning at it's finest!!`;
 
-  let emailInfo = `mailto:?subject=Pristine Clean Job Directions: ${destination}&body=Directions from ${origin} to ${destination}. Map Link: ${tinyURI}`;
+  const shareData = {
+    title: `Pristine Clean Job Directions: ${destination}`,
+    text: `Pristine Clean Directions\n\nJob Location: ${destination}\n\nMap Link: ${tinyURI}\n\nCleaning at it's finest!!`,
+    url: tinyURI,
+  }
+
+  let emailShareData = `mailto:?subject=Pristine Clean Job Directions: ${destination}&body=Directions from ${origin} to ${destination}. Map Link: ${tinyURI}`;
 
   // URL would not post properly in email with "&". Use tiny URL to get around the issue.
   async function postData(url = "", data = {}) {
@@ -95,9 +102,9 @@ export const Share = () => {
             className="btn btn-secondary"
             variant="secondary"
             title="Email share"
-            onClick={() => window.open(emailInfo)}
+            onClick={() => window.open(emailShareData)}
           >
-            Click to Email Directions
+            Click to Send Directions via Email
           </Button>
         </Modal.Body>
       </Modal>
