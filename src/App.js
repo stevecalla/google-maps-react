@@ -1,33 +1,79 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
-import Map from './components/Map/';
+import Map from "./components/Map/";
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faLocation, faShareNodes, faXmarkCircle, faSearchLocation, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faTrash,
+  faLocation,
+  faShareNodes,
+  faXmarkCircle,
+  faSearchLocation,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 
-import { geoLocation, error, options } from "./components/Map/geoLocation";
-
-library.add(faTrash, faLocation, faShareNodes, faXmarkCircle, faSearchLocation, faSearch);
+library.add(
+  faTrash,
+  faLocation,
+  faShareNodes,
+  faXmarkCircle,
+  faSearchLocation,
+  faSearch
+);
 
 function App() {
-  const [originDb, setOriginDb] = useState('Boulder, CO, USA');
+  const [originDb, setOriginDb] = useState("");
   // const [originDb, setOriginDb] = useState('40.0945509, -105.178197'); //Boulder, CO
-  const [destinationDb, setDestinationDb] = useState('Longmont, CO, USA');
+  const [destinationDb, setDestinationDb] = useState("Longmont, CO, USA");
+  const [coords, setCoords] = useState("");
 
-  // get originDB from geoLocationAPI
-  // convert geoLocation lat/lng to street address
-  // setOriginDb('Boulder, CO, USA');
-  // navigator.geolocation.getCurrentPosition(geoLocation, error, options);
+  useEffect(() => {
+    try {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let crds = position.coords;
+        return setCoords(`${crds.latitude},${crds.longitude}`);
+      });
+    } catch (error) {
+      console.warn(`ERROR(${error.code}): ${error.message}`);
+    }
+  }, []);
 
-  let currentLocation;
-  async function getLocation() {
-    currentLocation = await geoLocation;
-  }
+  useEffect(() => {
+    // coords && console.log(coords);
 
-  getLocation();
-  console.log(currentLocation);
-  
+    async function postData(url = "", data = {}) {
+      let reverseGeoCodeURL = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords}&result_type=street_address&key=AIzaSyBGXIaFo3Dhmjo6RcGyEKYi3KqXN0sYt2I`;
+
+      fetch(reverseGeoCodeURL) 
+        .then((response) => {
+          if (response.ok) {
+            response.json().then((data) => {
+              // console.log(data.results[0].formatted_address);
+              setOriginDb(data.results[0].formatted_address);
+              console.log({originDb})
+            });
+          } else {
+            // launchValidationModal(
+            //   "Error: Weather Not found",
+            //   // `Try Again at a Later Date: ${response.statusText}`
+            //   "weather"
+            // );
+          }
+        })
+        .catch((error) => {
+          // launchValidationModal(
+          //   "Error: Weather Not found",
+          //   // `Try again later, please`,: ${response.statusText}`
+          //   "weather"
+          // );
+        });
+    }
+
+    coords && postData();
+
+  }, [coords, originDb]);
+
   //get destinationDB from database
   // setDestinationDb('Longmont, CO, USA');
 

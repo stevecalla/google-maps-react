@@ -25,6 +25,7 @@ export function geoLocation(pos) {
     console.log(`More or less ${crd.altitudeAccuracy} meters.`);
     console.log(`Speed: ${crd.speed}`);
     console.log(`Heading: ${crd.heading}`);
+    console.log({crd})
     return crd;
     
   } catch (error) {
@@ -39,11 +40,33 @@ export function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-navigator.geolocation.getCurrentPosition(geoLocation, error, options);
+// navigator.geolocation.getCurrentPosition(geoLocation, error, options);
 
 // source:
 // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
 // https://www.w3.org/TR/geolocation/
+
+export function getCoords() {
+  try {
+    navigator.geolocation.getCurrentPosition((position) => {
+      let crds = position.coords;
+      console.log(
+          position.coords.latitude, 
+          position.coords.longitude,
+          position.coords.accuracy,
+          position.coords.altitude,
+          position.coords.altitudeAccuracy,
+          position.coords.speed
+      );
+      return (`${crds.latitude},${crds.longitude}`);
+    })
+
+  } catch (error) {
+
+    console.warn(`ERROR(${error.code}): ${error.message}`);
+    
+  }
+}
 
 // navigator.geolocation.getCurrentPosition((position) => {
 //   console.log(
