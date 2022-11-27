@@ -9,6 +9,7 @@ import { LoadMap } from "./LoadMap";
 import seed from "./responseSeed";
 import { DirectionsPanel } from "./DirectionsPanel";
 import { Share } from "./Share";
+import { SearchIcon } from "./SearchIcon";
 
 const center = { lat: 40.1672, lng: -105.1019 };
 const libraries = ["places"];
@@ -117,8 +118,12 @@ function Map({ originDb, destinationDb }) {
           origin={origin}
         />
 
+        <SearchIcon />
+
+        <div style={lineBreakStyle}></div>
+
         <Share />
-        
+
       </div>
       
       <DirectionsPanel />
@@ -135,3 +140,17 @@ const containerStyle = {
   height: "93vh",
   position: "relative",
 };
+
+const lineBreakStyle = {
+  heigth: "1px",
+  width: "35px",
+  bottom: "62px",
+  left: "18px",
+  padding: "1px",
+  color: "grey",
+  backgroundColor: "lightgrey",
+  position: "absolute",
+  zIndex: "2",
+  borderRadius: "3px",
+};
+
