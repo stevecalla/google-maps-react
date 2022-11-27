@@ -51,7 +51,7 @@ export const Share = () => {
     }
   }
 
-  let iphoneInfo = `Pristine Clean Directions\nJob Location: ${destination}\nMap Link: ${tinyURI}\n\nCleaning at it's finest!!`;
+  let iphoneInfo = `Pristine Clean Directions\n\nJob Location: ${destination}\n\nMap Link: ${tinyURI}\n\nCleaning at it's finest!!`;
 
   let emailInfo = `mailto:?subject=Pristine Clean Job Directions: ${destination}&body=Directions from ${origin} to ${destination}. Map Link: ${tinyURI}`;
 
